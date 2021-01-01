@@ -24,5 +24,5 @@ urlpatterns = [
     path('addNewPost/', views.addNewPost, name="addNewPost"),
     path('search_on_index', views.index_search, name="index_search"),
     path('category/<name>', views.category, name="category"),
-    path('blog', views.blog, name="blog"),
+    path('blog', views.blog, name="blog")
 ]
