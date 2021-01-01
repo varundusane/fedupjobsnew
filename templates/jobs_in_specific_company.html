@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>FEDUP.JOBS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+        .nav-item:hover{
+            background-color: skyblue;
+            
+            border-radius: 5px;
+        }
+        .nav-item:hover > a{
+            color: white !important;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
+            <li class="nav-item active ml-5">
+              <a class="nav-link" href="/">Jobs </a>
+            </li>
+            <li class="nav-item active ml-5">
+              <a class="nav-link" href="/startup">Startup</a>
+            </li>
+            <li class="nav-item active ml-5">
+              <a class="nav-link"  href="/tags">Tags</a>
+            </li>
+            <li class="nav-item active ml-5">
+              <a class="nav-link" href="/location">Location</a>
+            </li>
+          </ul>
+          <!-- <form class="form-inline my-2 my-lg-0"> -->
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+              <a href="/addNewPost/" class="btn btn-outline-info text-center text-md-left ml-5 ml-sm-0 my-2 my-sm-0">post your job</a>
+          <!-- </form> -->
+        </div>
+      </nav>
+    <section class="content-wrapper">
+        <div class="content">
+            <div class="row">
+                <h1 class=" col-md-3 text-primary text-center text-md-left h1">Join a startup.</h1>
+                <h2 class=" col-md-9 h3 ml-2 ml-md-0 p-md-0">Help shape the future by joining one of the fastest growing
+                    technology startups.</h2>
+            </div>
+            <div class="searchForm" data-behavior="search" data-controller="search-form"
+                data-search-form-since-filter="1607147442">
+                <div class="searchForm__box row">
+                    <div class="searchForm__section searchForm__section--primary col-12 col-md-4">
+                        <div class="searchForm__section__label mt-md-2 p-3">What job are you looking for?</div>
+                        <div class="searchForm__section__input mt-md-2 p-3">
+                            <div id="foobar">
+                                <div class="ais-SearchBox">
+                                    <form action="" role="search" class="ais-SearchBox-form" novalidate="">
+                                        
+                                        <input class="ais-SearchBox-input searchField__input" id="title" type="search"
+                                            placeholder="Search for job title, skills, startups…" autofocus="true"
+                                            autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                                            maxlength="512">
+                                        <button class="ais-SearchBox-submit" type="submit"
+                                            title="Submit the search query." hidden="">
+                                            <svg class="ais-SearchBox-submitIcon" xmlns="http://www.w3.org/2000/svg"
+                                                width="10" height="10" viewBox="0 0 40 40">
+                                                <path
+                                                    d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z">
+
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        <button class="ais-SearchBox-reset" type="reset" title="Clear the search query."
+                                            hidden=""><svg class="ais-SearchBox-resetIcon"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="10"
+                                                height="10">
+                                                <path
+                                                    d="M8.114 10L.944 2.83 0 1.885 1.886 0l.943.943L10 8.113l7.17-7.17.944-.943L20 1.886l-.943.943-7.17 7.17 7.17 7.17.943.944L18.114 20l-.943-.943-7.17-7.17-7.17 7.17-.944.943L0 18.114l.943-.943L8.113 10z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        <span class="ais-SearchBox-loadingIndicator" hidden="">
+                                            <svg class="ais-SearchBox-loadingIcon" width="16" height="16"
+                                                viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#444">
+                                                <g fill="none" fillrule="evenodd">
+                                                    <g transform="translate(1 1)" strokewidth="2">
+                                                        <circle strokeopacity=".5" cx="18" cy="18" r="18">
+
+                                                        </circle>
+                                                        <path d="M36 18c0-9.94-8.06-18-18-18">
+                                                            <animateTransform attributeName="transform" type="rotate"
+                                                                from="0 18 18" to="360 18 18" dur="1s"
+                                                                repeatCount="indefinite">
+
+                                                            </animateTransform>
+                                                        </path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="searchForm__section searchForm__section--secondary col-12 col-md-4">
+                        <div class="searchForm__section__label">
+                            <div id="remote">
+                                <div class="ais-ToggleRefinement">
+                                    <label class="ais-ToggleRefinement-label">
+                                        <input class="ais-ToggleRefinement-checkbox" type="checkbox">
+                                        <span class="ais-ToggleRefinement-labelText col-12">
+                                            <div class="">
+                                                <div class="searchForm__section__label__toggleOption searchForm__section__label__toggleOption--default">
+                                                    Where?
+                                                </div>
+                                                or 
+                                                <div class="searchForm__section__label__toggleOption">Remote</div>
+                                            </div>
+                                        </span></label></div>
+
+                            </div>
+                        </div>
+                        <div class="searchForm__section__input">
+                            <div class="autocompleteWrapper">
+                                <span class="algolia-autocomplete col-12"
+                                    style="position: relative; display: inline-block; direction: ltr;"><input
+                                        type="text" name="search-input" id="search-input" value=""
+                                        class="searchField__input ap-nostyle-input form-control" placeholder="Anywhere"
+                                        autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list"
+                                        aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto"
+                                        style="position: relative; vertical-align: top;">
+                                    <pre aria-hidden="true"
+                                        style="position: absolute; visibility: hidden; white-space: pre; font-family: -apple-system, BlinkMacSystemFont,Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji; font-size: 22.5px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
+                                    <span class="ap-nostyle-dropdown-menu" role="listbox"
+                                        id="algolia-autocomplete-listbox-0"
+                                        style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;">
+                                        <div class="ap-nostyle-dataset-1"></div>
+                                        <div class="ap-nostyle-dataset-2"></div>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="searchForm__section searchForm__section--tertiary col-12 col-md-4 mx-auto">
+                        <div class="searchForm__section__input">
+                            <div id="commitments">
+                                <div class="ais-RefinementList">
+                                    <ul class="ais-RefinementList-list my-auto row">
+                                        <li class="ais-RefinementList-item col-6">
+                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
+                                                        class="ais-RefinementList-checkbox "id='full_time' name="job_type"
+                                                        value="Full-Time"> <span
+                                                        class="ais-RefinementList-labelText">Full-Time</span> <span
+                                                        class="ais-RefinementList-count">{{ full_time }}</span> </label>
+                                            </div>
+                                        </li>
+                                        <li class="ais-RefinementList-item col-6">
+                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
+                                                        class="ais-RefinementList-checkbox" id="part_time" name="job_type"
+                                                        value="Part-Time"> <span
+                                                        class="ais-RefinementList-labelText">Part-Time</span> <span
+                                                        class="ais-RefinementList-count">{{ part_time }}</span> </label>
+                                            </div>
+                                        </li>
+                                        <li class="ais-RefinementList-item col-6">
+                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
+                                                        class="ais-RefinementList-checkbox" id="internship" name="job_type"
+                                                        value="Internship"> <span
+                                                        class="ais-RefinementList-labelText">Internship</span> <span
+                                                        class="ais-RefinementList-count">{{ Internship }}</span>
+                                                </label></div>
+                                        </li>
+                                        <li class="ais-RefinementList-item col-6">
+                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
+                                                        class="ais-RefinementList-checkbox" id="contractor" name="job_type"
+                                                        value="Contractor"> <span
+                                                        class="ais-RefinementList-labelText">Contractor</span> <span
+                                                        class="ais-RefinementList-count">{{ Contractor }}</span>
+                                                </label></div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <section class="content-wrapper">
+            <div class="content content--unpadded">
+                {% for job in jobs %}
+                    <div class="jobCard  row" data-action="click->clickable#open" data-clickable-target="_blank"
+                        data-clickable-url="/art-director-design-at-procore-4" data-controller="clickable">
+                        <div class="jobCard__details col-md-4 col-12">
+                            <div class="jobCard__details__logo col-3" style="background-image: url('{{ job.company_img_url }}')"></div>
+                            <div class="jobCard__details__ultra col-8">
+                                <a class="jobCard__details__title row col-12"
+                                    href="{% url 'job_details' id=job.id %}">{{ job.job_title }}</a>
+                                <div class="jobCard__details__company row col-12"><a href="{% url 'all_jobs_in_company' company_name=job.company_name %}">{{ job.company_name }}</a></div>
+                            </div>
+                        </div>
+                        <div class="jobCard__tags  d-none d-md-block col-md-4">
+                            {% for key in job.job_keys.all %}
+                            <a class="tag" href="{% url 'filtered_keys' job_keys=key.name %}">{{ key.name }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="jobCard__details__location d-none d-md-block col-md-4">
+                            {% if job.location %}
+                            {{ job.location}}
+                            {% endif %}, {% if job.country %}{{job.country}} {% endif %}
+                        </div>
+                    </div>
+                {%endfor%}
+            </div>
+        </section>
+    </div>
+
+
+<script>
+    const company = "{{company_name}}";
+    const page_for = "{{ page_for }}"
+    let past_html = '';
+    $('#title').on('keyup change', searchResult)
+    $('#search-input').on('keyup change', searchResult);
+    $('#full_time').on('click change', searchResult);
+    $('#part_time').on('click change', searchResult);
+    $('#internship').on('click change', searchResult);
+    $('#contractor').on('click change', searchResult);
+    $('.ais-SearchBox-reset').on('click', searchResult);
+
+    let initialObj = {
+        'title': $('#title').val(),
+        'location': $('#search-input').val(),
+        'full_time': $('#full_time').prop('checked'),
+        'part_time': $('#part_time').prop('checked'),
+        'intern': $('#internship').prop('checked'),
+        'contract': $('#contractor').prop('checked')
+    }
+
+
+    function searchResult(){
+        if(past_html == ''){
+            past_html = $('.content--unpadded').html()
+        }
+
+        let title = ($('#title').val()).length >0 ? $('#title').val() : '';
+        let location = ($('#search-input').val()).length > 0 ? $('#search-input').val() : '';
+        let full_time = $('#full_time').prop('checked');
+        let part_time = $('#part_time').prop('checked');
+        let intern = $('#internship').prop('checked');
+        let contract = $('#contractor').prop('checked');
+
+        if((title=='') && (location == '') && (full_time == initialObj.full_time) && (full_time == initialObj.full_time) && (part_time==initialObj.part_time) && (intern==initialObj.intern)&&(contract==initialObj.contract)){
+            $('.content--unpadded').html(past_html);
+            return
+        }
+        let url = "";
+        if(page_for == 'company'){
+
+            url = `/api/filteredFromCompanyViewSet?company=${company}&title=${title}&location=${location}&full_time=${full_time}&part_time=${part_time}&interns=${intern}&contract=${contract}`;
+        }
+        else if(page_for == 'job_keys'){
+            url = `/api/filteredForKeysViewSet?keys=${company}&title=${title}&location=${location}&full_time=${full_time}&part_time=${part_time}&interns=${intern}&contract=${contract}`;
+        }else if(page_for == 'country'){
+            url = `/api/filteredForCountryViewSet?country=${company}&title=${title}&location=${location}&full_time=${full_time}&part_time=${part_time}&interns=${intern}&contract=${contract}`;
+        }else if(page_for == 'category'){
+            url = `/api/filteredForCategoryViewSet?category=${company}&title=${title}&location=${location}&full_time=${full_time}&part_time=${part_time}&interns=${intern}&contract=${contract}`;
+            
+        }
+
+        if(url == ""){return}
+        $.ajax({
+            url: url ,
+            method: 'GET',
+            contentType: 'application/json'
+        }).done(response=>{
+            let text = '';
+            if(response.length ==0){
+                let texts = `<div class="text-center"><p>No jobs. </p></div>`;
+                
+                $('.content--unpadded').html(texts)
+            }
+            response.map(index=>{
+                let keys = index.job_keys;
+                let aTags = '';
+                for(var i=0; i<keys.length; i++){
+                    aTags += `<a class="tag" href="/jobkey/${keys[i].name}">${keys[i].name}</a>`;
+                }
+                let locations = '';
+                if(index.location != null){
+                    locations += index.location
+                }
+                if(index.country != null){
+                    locations += ', '+ index.country
+                }
+                text += `
+                <div class="jobCard row" data-action="click->clickable#open" data-clickable-target="_blank"
+                            data-clickable-url="/art-director-design-at-procore-4" data-controller="clickable">
+                            <div class="jobCard__details col-md-4 col-12">
+                                <div class="jobCard__details__logo col-3" style="background-image: url('{{ job.company_img_url }}')"></div>
+                                <div class="jobCard__details__ultra col-8">
+                                    <a class="jobCard__details__title row col-12"
+                                        href="/job/${index.id}">${index.job_title}</a>
+                                    <div class="jobCard__details__company row col-12"><a href="/jobs/${index.company_name}">${index.company_name}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jobCard__tags d-none d-md-block col-md-4">
+                                ${aTags}
+                            </div>
+                            <div class="jobCard__details__location d-none d-md-block col-md-4 ">
+                                ${locations}
+                            </div>
+                        </div>
+                `;
+            })
+
+            $('.content--unpadded').html(text)
+        })
+        .fail(err=>{
+            console.log(err)
+        })
+    }
+
+</script>
+
+
+</body>
+</html>

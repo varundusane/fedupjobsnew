@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>FEDUP.JOBS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <style>
+        .nav-item:hover{
+            background-color: skyblue;
+            
+            border-radius: 5px;
+        }
+        .nav-item:hover > a{
+            color: white !important;
+        }
+    </style>
+    
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
+            <li class="nav-item active ml-5">
+              <a class="nav-link" href="/">Jobs </a>
+            </li>
+            <li class="nav-item active ml-5">
+              <a class="nav-link" href="/startup">Startup</a>
+            </li>
+            <li class="nav-item active ml-5">
+              <a class="nav-link"  href="/tags">Tags</a>
+            </li>
+            <li class="nav-item active ml-5">
+              <a class="nav-link" href="/location">Location</a>
+            </li>
+          </ul>
+          <!-- <form class="form-inline my-2 my-lg-0"> -->
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+              <a href="/addNewPost/" class="btn btn-outline-info text-center text-md-left ml-5 ml-sm-0 my-2 my-sm-0">post your job</a>
+          <!-- </form> -->
+        </div>
+      </nav>
+    <div class="container">
+        <div style="height: 50px;">
+
+            <div class="col-2 mx-auto" style="background-image: url('{{ jobDetails.company_img_url }}'); height: 50px;"></div>
+        </div>
+        <div>
+            <p class="text-center" style="text-transform: uppercase; color: gray; font-weight: 750;">{{jobDetails.company_name}} IS HIRING A</p>
+            <h1 class="text-center">{{ jobDetails.job_title }}</h1>
+        </div>
+        <div class="col-md-7" style="border-bottom: 1px solid #eee0e0;">
+            {% if jobDetails.location and jobDetails.country%}
+                <p>{{ jobDetails.location }}, {{jobDetails.country}}</p>
+            {% elif jobDetails.is_remote_job %}
+                <p>Remote</p>
+            {% elif jobDetails.job_type %}
+                <p>{{ jobDetails.job_type }}</p>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-md-7 ">
+                {{jobDetails.job_desc|safe}}
+                <div class="mt-5 mb-5">
+                    <a class="btn btn-active btn-primary " href="{{jobDetails.apply_job_link}}">APPLY FOR THIS JOB</a>
+                </div>
+                
+            </div>
+            <div class="col-md-3 ml-5 text-center d-none d-md-block justify-content-center">
+                <a href="{{jobDetails.apply_job_link}}" class="btn btn-active btn-primary ">APPLY FOR THIS JOB</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

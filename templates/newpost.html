@@ -1,0 +1,198 @@
+<html lang="en">
+
+<head>
+  {% load static %}
+
+  <!-- Meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width = device-width, initial-scale = 1, shrink-to-fit = no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+  <title>fedup.jobs/post/new</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    .editor {
+      border: solid 1px #ccc;
+      padding: 20px;
+      min-height: 200px;
+    }
+
+    .sample-toolbar {
+      border: solid 1px #ddd;
+      background: #f4f4f4;
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    .sample-toolbar>span {
+      cursor: pointer;
+    }
+
+    .sample-toolbar>span:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
+        <li class="nav-item active ml-5">
+          <a class="nav-link" href="/">Jobs </a>
+        </li>
+        <li class="nav-item active ml-5">
+          <a class="nav-link" href="/startup">Startup</a>
+        </li>
+        <li class="nav-item active ml-5">
+          <a class="nav-link"  href="/tags">Tags</a>
+        </li>
+        <li class="nav-item active ml-5">
+          <a class="nav-link" href="/location">Location</a>
+        </li>
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0"> -->
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+          <a href="/addNewPost/" class="btn btn-outline-info text-center text-md-left ml-5 ml-sm-0 my-2 my-sm-0">post your job</a>
+      <!-- </form> -->
+    </div>
+  </nav>
+  <div class="container">
+    <div class="container_section mx-auto">
+      <div class="row">
+        <div class=" col-12"> 
+          <h1 class=" col-sm-12 col-md-3 text-primary text-center text-md-left h3">Hire the best.</h1>
+          <h2 class="col-sm-12 col-md-9 h5 text-center text-md-left">Share your job post with thousand of job seekers</h2>
+
+        </div>
+        <form method="POST" class="mx-auto" action="">
+          {% csrf_token %}
+          <section class="wizard__section">
+            <div class="input string required post_title">
+              <label class="" for="post_title">
+                 Job Title</label>
+              <input autofocus="autofocus" class="string required form-control" placeholder="Example: Senior Ruby Developer"
+                type="text" name="job_title" id="post_title">
+            </div>
+            <div class="input radio_buttons optional post_commitment radio_buttons--inline">
+              
+              <span class="radio">
+                <label for="post_commitment_full-time">
+                  <input class="radio_buttons optional" type="radio" value="Full-Time" checked="checked"
+                    name="job_type" id="post_commitment_full-time">Full-Time</label></span><span
+                class="radio"><label for="post_commitment_part-time">
+                  <input class="radio_buttons optional" type="radio" value="Part-Time" name="job_type"
+                    id="post_commitment_part-time">Part-Time</label>
+              </span><span class="radio">
+                <label for="post_commitment_internship">
+                  <input class="radio_buttons optional" type="radio" value="Internship" name="job_type"
+                    id="post_commitment_internship">Internship</label>
+              </span><span class="radio">
+                <label for="post_commitment_contractor">
+                  <input class="radio_buttons optional" type="radio" value="Contractor" name="job_type"
+                    id="post_commitment_contractor">Contractor</label></span>
+            </div>
+            <div class="input boolean optional post_remote">
+              <input class="" type="hidden" name="is_scraped_data" value="true">
+              <label class="optional checkbox" for="post_remote">
+                <input class="boolean optional" type="checkbox" value="1" name="is_remote_job" id="post_remote">Employees
+                may work remotely</label>
+            </div>
+            <div class="input string optional post_location_str field_with_hint">
+              <label class="string optional" for="post_location_str">Location</label>
+              <input class="string optional form-control" placeholder="Example: San Francisco, CA" type="text"
+                name="location" id="post_location_str">
+              <span class="hint">Leave blank if you only accept remote candidates.</span>
+
+            </div>
+            <div class="input string optional post_location_str field_with_hint">
+              <label class="string optional" for="post_location_str">Country</label>
+              <input class="string optional form-control" placeholder="Example: San Francisco, CA" type="text"
+                name="country" id="post_location_str">
+              <span class="hint"></span>
+
+            </div>
+            <div class="input string optional post_location_str field_with_hint">
+              <label class="string optional" for="post_location_str">Describe about the job</label>
+              <textarea rows=4 cols="10" class="form-control" name="job_desc" ></textarea>
+              <span class="hint"></span>
+
+            </div>
+            
+
+
+            <div class="input url optional post_url field_with_hint">
+              <label class="url optional" for="post_url">Where should people go to apply for this job?
+              </label>
+
+              <input class="string url optional" placeholder="Example:   https://careers.foobar.com/12345/apply"
+                type="text" name="apply_job_link" id="post_url">
+              <span class="hint">Alternatively, you can enter an email address.</span>
+            </div>
+          </section>
+          <section class="wizard__section">
+            <div class="form-group">
+              <label class="string required" for="post_title">
+                <abbr title="required">*</abbr>company name</label>
+              <input class="string required" placeholder="Example: Foobar" type="text"
+                name="company_name" id="post_company_attributes_name">
+            </div>
+            <div class="form-group">
+              <label for="string required">company website</label>
+              <input class="string url optional" placeholder="Example: https://foobar.com" type="text"
+                name="company_website" id="post_company_attributes_website_url">
+            </div>
+            <div class="form-group">
+              <label for="string required">company Email</label>
+              <input class="string url optional" placeholder="Example: abcd12@foobar.com" type="email"
+                name="company_email_address" id="post_company_attributes_website_url">
+            </div>
+            <div class="form-group">
+              <label for="string required">company img url</label>
+              <input class="string url optional" placeholder="Example: https://foobar.com" type="url"
+                name="company_img_url" id="post_company_attributes_website_url">
+            </div>
+          </section>
+          <div class="text-center">
+            <button type="submit" class="btn btn-active btn-primary">ADD NEW JOB</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+    <script>
+      // window.addEventListener('load', function () {
+      //   document.getElementById('sampleeditor').setAttribute('contenteditable', 'true');
+      //   document.getElementById('sampleeditor2').setAttribute('contenteditable', 'true');
+      // });
+
+      function format(command, value) {
+        document.execCommand(command, false, value);
+      }
+
+      function setUrl() {
+        var url = document.getElementById('txtFormatUrl').value;
+        var sText = document.getSelection();
+        document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
+        document.getElementById('txtFormatUrl').value = '';
+      }
+    </script>
+
+
+
+
+</body>
+
+</html>

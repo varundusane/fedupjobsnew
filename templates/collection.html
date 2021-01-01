@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>fedup.jobs</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/collectionstyle.css' %}">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
+        <li class="nav-item active ml-5">
+          <a class="nav-link" href="/">Jobs </a>
+        </li>
+        <li class="nav-item active ml-5">
+          <a class="nav-link" href="/startup">Startup</a>
+        </li>
+        <li class="nav-item active ml-5">
+          <a class="nav-link"  href="/tags">Tags</a>
+        </li>
+        <li class="nav-item active ml-5">
+          <a class="nav-link" href="/location">Location</a>
+        </li>
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0"> -->
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+          <a href="/addNewPost/" class="btn btn-outline-info text-center text-md-left ml-5 ml-sm-0 my-2 my-sm-0">post your job</a>
+      <!-- </form> -->
+    </div>
+  </nav>
+  <div class="hugger">
+    <div class="hugger__content">
+      <header class="productHeader">
+        <div class="productHeader__logo">
+          <div class="collectionStackIcon">
+            <div class="collectionStackIcon__layer"></div>
+            <div class="collectionStackIcon__layer"></div>
+            <div class="collectionStackIcon__layer"></div>
+            <div class="collectionStackIcon__layer">
+              <div class="collectionStackIcon__layer__icon">
+                <div class="collectionStackIcon__layer__icon__square"></div>
+              </div>
+              <div class="collectionStackIcon__layer__icon">
+                <div class="collectionStackIcon__layer__icon__circle"></div>
+              </div>
+              <div class="collectionStackIcon__layer__icon">
+                <div class="collectionStackIcon__layer__icon__triangle"></div>
+              </div>
+              <div class="collectionStackIcon__layer__icon">
+                <div class="collectionStackIcon__layer__icon__heart"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="productHeader__title">Job Collections</h1>
+        <h2 class="productHeader__subtitle">Handpicked startup collections that will help you find a job you’ll love.
+        </h2>
+      </header>
+    </div>
+  </div>
+  <script>
+    function hugger() {
+      var elem = document.getElementById("hugger__content");
+      var pos = 0;
+      var id = setInterval(frame, 5);
+      function frame() {
+        if (pos == 350) {
+          clearInterval(id);
+        } else {
+          pos++;
+          elem.style.top = pos + "px";
+          elem.style.left = pos + "px";
+        }
+      }
+    }
+  </script>
+
+  <div class="hugger hugger--lastOnPage">
+    <div class="hugger__content">
+      <a class="collectionBox" style="background-image: url('img/female%20up.jpg')" href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Female Founders</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Join a female-led startup</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('img/fintech.jpg')" href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Fintech</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Make money changing finance</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('img/music.jpg')" href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Music</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Go to work dancing</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('/img/startuptool.jpg')"
+        href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Startup Tools</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Improve the apps you use</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('img/leaves.jpg')" href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Better Tomorrow</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Be the change you want to see</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('img/match%20maker.jpg')" href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Dating</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Become a matchmaker</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('img/travel.jpg')" href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Travel</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Revolutionize the travel industry</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a><a class="collectionBox" style="background-image: url('img/block%20chain.jpg')"
+        href="#">
+        <div class="collectionBox__details">
+          <div class="block">
+            <div class="collectionBox__title">Blockchain</div>
+          </div>
+          <div class="block">
+            <div class="collectionBox__description">Decentralize all the things</div>
+          </div>
+          <div class="collectionBox__companies">
+            <div class="collectionBox__jobCount">0 jobs</div>
+            <div class="collectionBox__jobCount collectionBox__companies__startups">0 startups</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>
+</body>
+
+</html>
