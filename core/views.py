@@ -348,3 +348,6 @@ class filtered_for_countryViewSet(viewsets.ModelViewSet):
         if ((contract == 'true') and (contract is not None)):
             queryset = queryset.filter(job_type__icontains='Contractor')
         return queryset
+
+def blog(request):
+    return render(request, 'blog.html')
