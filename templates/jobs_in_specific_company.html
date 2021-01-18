@@ -216,7 +216,7 @@
                             <div class="jobCard__details__ultra col-8">
                                 <a class="jobCard__details__title row col-12"
                                     href="{% url 'job_details' id=job.id %}">{{ job.job_title }}</a>
-                                <div class="jobCard__details__company row col-12"><a href="{% url 'all_jobs_in_company' company_name=job.company_name %}">{{ job.company_name }}</a></div>
+                                <div class="jobCard__details__company row col-12">{{ job.company_name }}</div>
                             </div>
                         </div>
                         <div class="jobCard__tags  d-none d-md-block col-md-4">

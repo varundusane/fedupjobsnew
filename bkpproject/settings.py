@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'core.apps.CoreConfig',
     'rest_framework'
 ]
 
@@ -84,7 +84,7 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'jobs',
         # 'USER': 'root',
-        # 'PASSWORD': '1234',
+        # 'PASSWORD': '',
         # 'HOST': '127.0.0.1',
         # 'PORT': '3306',
         # 'OPTIONS': {

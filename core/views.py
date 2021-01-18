@@ -6,12 +6,118 @@ from django.http import HttpResponse
 import json
 from django.core import serializers
 from rest_framework import viewsets, permissions
+from pandas import pandas as pd
+from schedule import Scheduler
+import threading
+import time
+import urllib3
+from io import StringIO
+import csv
+import requests
+from urllib3 import request
+# to handle certificate verification
+import certifi
+# to manage json data
+import json
+# for pandas dataframes
+import pandas as pd
+import os
+from bs4 import BeautifulSoup
+from pandas.io.json import json_normalize
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+
+def Command():
+        # WorkDetails.objects.all().delete()
+        # category = JobCategory(name="Recent")
+        # category.save()
+        # job_title = "jtitle"
+        # job_type = "Remote"
+        # # job_keys = request.POST.get('job_keys', None)
+        # is_remote_job = "1"
+        # location = "1"
+        # country =  "con1"
+        # job_desc =  "desc"
+        # apply_job_link =  "google.com"
+        # company_name =  "cmpname"
+        # company_website =  "yahoo.com"
+        # company_email_address =  "vdusane6@gmail.com"
+        # is_scraped_data =  True
+        # company_img_url =  "https://djangobook.com/wp-content/uploads/Django_ORM_600.png"
+        # job = WorkDetails(category=category, job_title=job_title, job_type=job_type, is_remote_job=is_remote_job, location=location,
+        #     country=country, job_desc=job_desc, apply_job_link=apply_job_link, company_name=company_name, company_website=company_website, 
+        #     company_email_address=company_email_address, is_scraped_data=is_scraped_data, company_img_url=company_img_url
+        # )
+
+        # job.save()
+        return None
+
+def run_continuously(self, interval=5):
+    """Continuously run, while executing pending jobs at each elapsed
+    time interval.
+    @return cease_continuous_run: threading.Event which can be set to
+    cease continuous run.
+    Please note that it is *intended behavior that run_continuously()
+    does not run missed jobs*. For example, if you've registered a job
+    that should run every minute and you set a continuous run interval
+    of one hour then your job won't be run 60 times at each interval but
+    only once.
+    """
+
+    cease_continuous_run = threading.Event()
+
+    class ScheduleThread(threading.Thread):
+
+        @classmethod
+        def run(cls):
+            while not cease_continuous_run.is_set():
+                self.run_pending()
+                time.sleep(interval)
+
+    continuous_thread = ScheduleThread()
+    continuous_thread.setDaemon(True)
+    continuous_thread.start()
+    return cease_continuous_run
+
+Scheduler.run_continuously = run_continuously   
+
+        # return render(request, 'index.html')
 # Create your views here.
 def index(request):
+
+    ##################################
+
+    page_no = request.GET.get('page', 1)
+
+    works = WorkDetails.objects.all()
+    # restaurents = Restaurents.objects.all().order_by('-avarage_ratings')
+    paginator = Paginator(works, 20)
+    try:
+        jobs=paginator.page(page_no)
+
+    except PageNotAnInteger:
+        jobs=paginator.page(1)
+
+    except EmptyPage:
+        jobs = paginator.page(paginator.num_pages)
+    # context['allrestaurents'] = restaurent
+    # context['categorys'] = category
+
+    # return render(request, 'users/allrestaurent.html', context)
+
+
+
+    ########################################
+    scheduler = Scheduler()
+    scheduler.every().second.do(Command)
+    scheduler.run_continuously()
     context = {}
     context['categorys'] = JobCategory.objects.all()
-    context['jobs'] = WorkDetails.objects.all()
+    context['jobs'] = jobs
     context['full_time'] = WorkDetails.objects.filter(Q(job_type__icontains = 'full-time') or Q(job_type__icontains = 'Full-time') 
         or Q(job_type__icontains='full_time')).count()
     context['part_time'] = WorkDetails.objects.filter(Q(job_type__icontains = 'part-time') or Q(job_type__icontains = 'Part-time') 
@@ -124,7 +230,7 @@ def addNewPost(request):
         company_name =  request.POST.get('company_name', None)
         company_website =  request.POST.get('company_website', None)
         company_email_address =  request.POST.get('company_email_address', None)
-        is_scraped_data =  True
+        is_scraped_data =  False
         company_img_url =  request.POST.get('company_img_url', None)
         job = WorkDetails(category=category, job_title=job_title, job_type=job_type, is_remote_job=is_remote_job, location=location,
             country=country, job_desc=job_desc, apply_job_link=apply_job_link, company_name=company_name, company_website=company_website, 
