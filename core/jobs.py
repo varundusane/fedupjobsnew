@@ -50,41 +50,61 @@ def weworkSrcipe():
 
 
 def start_stackoverflow_scrapes():
-    url = f"https://stackoverflow.com/jobs?r=true&q=devops"
+    title_texts= []
+    descriptions = []
+    jobs=[]
+    company_namess = []
+    company_img=[]
+
+    url = f"https://stackoverflow.com/jobs?r=true"
 
     html = requests.get(url, headers=headers).text
     soup = BeautifulSoup(html, 'lxml')
 
-    company = soup.find_all("h3", {"class": "fc-black-700 fs-body1 mb4"})
-    for item in company:
-        company_name = item.find("span")
-        items = soup.find_all("a", {"class": "s-link stretched-link"})
-        for item in items:
-            company_names = company_name.get_text().strip()
-            title_text = item.get_text()
-            link2 = f"https://stackoverflow.com{item.get('href')}"
-            
-            htmll = requests.get(link2, headers=headers).text
-            soupp = BeautifulSoup(htmll, 'lxml')
-            des = soupp.find("section", {"class": "mb32 fs-body2 fc-medium pr48"})
-            time_of_post = soupp.find('ul', {"class" : "horizontal-list horizontal-list__lg fs-body1 fc-black-500 ai-baseline mb24"})
-            try:
-                posted_on = time_of_post.find('li').get_text()
-            except:
-                posted_on = ''
-            apply_link = soupp.find_all('div', {'class': "js-apply-container"})[1].find('a', href=True)
-            the_apply_link = apply_link['href'] # HERE IS THE APPLICABLE LINKS
-            company_logo = soupp.find('div', {'class': 'grid--cell fl-shrink0'}).find('img', src=True)
-            try:
-                category = JobCategory.objects.all().first()
-            except:
-                category = JobCategory(name = 'Recent')
-                category.save()
-            job = WorkDetails(
-                category=category, job_title=title_text,posted_on=posted_on, job_desc=des.text.strip(), apply_job_link=the_apply_link, company_name=company_names,  is_scraped_data=True, company_img_url=company_logo['src']
-            )
-            job.save()
-
+    pages = soup.find("div", {"class": "s-pagination"}).find_all('a', {"class": "s-pagination--item"})
+    pages.pop()
+    # print(pages)
+    for page in pages:
+        # print(page.text)
+        if page.text != 'nextchevron_right':
+            page_url = page['href']
+            link1 = f"https://stackoverflow.com{page_url}"
+            htmls = requests.get(link1, headers=headers).text
+            soups = BeautifulSoup(htmls, 'lxml')
+        
+            items = soups.find_all("a", {"class": "s-link stretched-link"})
+            # print(len(items))
+            for item in items:
+                title_text = item.get_text()
+                link2 = f"https://stackoverflow.com{item.get('href')}"
+                
+                htmll = requests.get(link2, headers=headers).text
+                soupp = BeautifulSoup(htmll, 'lxml')
+                company_names = soupp.find('div', {'class': "fc-black-700 fs-body3"}).find('a')
+                des = soupp.find("section", {"class": "mb32 fs-body2 fc-medium pr48"})
+                time_of_post = soupp.find('ul', {"class" : "horizontal-list horizontal-list__lg fs-body1 fc-black-500 ai-baseline mb24"})
+                try:
+                    posted_on = time_of_post.find('li').get_text()
+                except:
+                    posted_on = ''
+                apply_link = soupp.find_all('div', {'class': "js-apply-container"})[1].find('a', href=True)
+                try:
+                    the_apply_link = apply_link['href'] # HERE IS THE APPLICABLE LINKS
+                except:
+                    continue
+                company_logo = soupp.find('div', {'class': 'grid--cell fl-shrink0'}).find('img', src=True)
+                try:
+                    category = JobCategory.objects.all().first()
+                except:
+                    category = JobCategory(name = 'Recent')
+                    category.save()
+                try:
+                    job = WorkDetails(
+                        category=category, job_title=title_text,posted_on=posted_on, job_desc=des.text.strip(), apply_job_link=the_apply_link, company_name=company_names.text,  is_scraped_data=True, company_img_url=company_logo['src']
+                    )
+                    job.save()
+                except:
+                    pass
 
 
 def joson_response():
@@ -105,19 +125,18 @@ def joson_response():
             pass
 
 def Command():
-        # JobCategory.objects.all()
-        WorkDetails.objects.filter(is_scraped_data=True).delete()
-        print('Called')
-        weworkSrcipe()
-        start_stackoverflow_scrapes()
-        joson_response()
+    print('Called')
+    WorkDetails.objects.filter(is_scraped_data=True).delete()
+        # weworkSrcipe()
+    start_stackoverflow_scrapes()
+        # joson_response()
 
 
 
 
 
 
-def run_continuously(self, interval=5):
+def run_continuously(self, interval=700):
     """Continuously run, while executing pending jobs at each elapsed
     time interval.
     @return cease_continuous_run: threading.Event which can be set to
@@ -149,5 +168,4 @@ Scheduler.run_continuously = run_continuously
 def start_scheduler():
     scheduler = Scheduler()
     scheduler.every().second.do(Command)
-    scheduler.run_continuously()     
-
+    scheduler.run_continuously()

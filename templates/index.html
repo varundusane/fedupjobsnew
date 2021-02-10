@@ -42,9 +42,9 @@
             <li class="nav-item active ml-5">
               <a class="nav-link"  href="/tags">Tags</a>
             </li>
-            <li class="nav-item active ml-5">
+            <!-- <li class="nav-item active ml-5">
               <a class="nav-link" href="/location">Location</a>
-            </li>
+            </li> -->
             <li class="nav-item active ml-5">
                 <a class="nav-link" href="/blog">Blogs</a>
               </li>
@@ -257,11 +257,16 @@
                                 data-clickable-url="/art-director-design-at-procore-4" data-controller="clickable">
                                 <div class="jobCard__details col-12">
                                     <div class="jobCard__details__logo col-3" style="background-image: url('{{ job.company_img_url }}')"></div>
+                                    <br>
                                     <div class="jobCard__details__ultra col-8">
                                         
-                                        <a class="jobCard__details__title row col-12"
+                                        <a class=""
                                             href="{% url 'job_details' id=job.id %}">{{ job.job_title }}</a> <div class="divv">{{job.posted_on}}</div>
+                                            {% if job.company_name %}     
                                         <div class="jobCard__details__company row col-12"><a href="{% url 'all_jobs_in_company' company_name=job.company_name %}">{{ job.company_name }}</a>
+
+                                            {% endif %}  
+
                                         </div>
 
                                        
@@ -301,7 +306,7 @@
                     </li>
                     <li class="page-item "><a class="page-link btn btn-active btn-primary" href="?page={{ jobs.previous_page_number }}">{{ jobs.previous_page_number }}</a></li>
                   {% endif %}
-                  <li class="page-item "><div class="current text-light page-link">{{ jobs.number }}</div></li>
+                  <li class="page-item "><div class="current page-link">{{ jobs.number }}</div></li>
 
                   {% if jobs.has_next %}
                     <li class="page-item "><a class="page-link btn btn-active btn-primary" href="?page={{ jobs.next_page_number }}">{{ jobs.next_page_number}}</a></li>
@@ -379,7 +384,7 @@
                                 <div class="jobCard__details col-md-4 col-12">
                                     <div class="jobCard__details__logo col-3" style="background-image: url('{{ job.company_img_url }}')"></div>
                                     <div class="jobCard__details__ultra col-8">
-                                        <a class="jobCard__details__title row col-12"
+                                        <a class=""
                                             href="/job/${index.id}">${index.job_title}</a>
                                         <div class="jobCard__details__company row col-12"><a href="/jobs/${index.company_name}">${index.company_name}</a>
                                         </div>

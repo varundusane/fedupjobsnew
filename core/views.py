@@ -32,31 +32,82 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 
 def Command():
-        # WorkDetails.objects.all().delete()
-        # category = JobCategory(name="Recent")
-        # category.save()
-        # job_title = "jtitle"
-        # job_type = "Remote"
-        # # job_keys = request.POST.get('job_keys', None)
-        # is_remote_job = "1"
-        # location = "1"
-        # country =  "con1"
-        # job_desc =  "desc"
-        # apply_job_link =  "google.com"
-        # company_name =  "cmpname"
-        # company_website =  "yahoo.com"
-        # company_email_address =  "vdusane6@gmail.com"
-        # is_scraped_data =  True
-        # company_img_url =  "https://djangobook.com/wp-content/uploads/Django_ORM_600.png"
-        # job = WorkDetails(category=category, job_title=job_title, job_type=job_type, is_remote_job=is_remote_job, location=location,
-        #     country=country, job_desc=job_desc, apply_job_link=apply_job_link, company_name=company_name, company_website=company_website, 
-        #     company_email_address=company_email_address, is_scraped_data=is_scraped_data, company_img_url=company_img_url
-        # )
+    # WorkDetails.objects.filter(is_scraped_data=True).delete()
+    # url = f"https://stackoverflow.com/jobs?r=true"
 
-        # job.save()
-        return None
+    # html = requests.get(url, headers=headers).text
+    # soup = BeautifulSoup(html, 'lxml')
 
-def run_continuously(self, interval=5):
+    # company = soup.find_all("h3", {"class": "fc-black-700 fs-body1 mb4"})
+    # for item in company:
+    #     company_name = item.find("span")
+    #     items = soup.find_all("a", {"class": "s-link stretched-link"})
+    #     for item in items:
+    #         company_names = company_name.get_text().strip()
+    #         title_text = item.get_text()
+    #         link2 = f"https://stackoverflow.com{item.get('href')}"
+            
+    #         htmll = requests.get(link2, headers=headers).text
+    #         soupp = BeautifulSoup(htmll, 'lxml')
+    #         des = soupp.find("section", {"class": "mb32 fs-body2 fc-medium pr48"})
+    #         time_of_post = soupp.find('ul', {"class" : "horizontal-list horizontal-list__lg fs-body1 fc-black-500 ai-baseline mb24"})
+    #         try:
+    #             posted_on = time_of_post.find('li').get_text()
+    #         except:
+    #             posted_on = ''
+    #         apply_link = soupp.find_all('div', {'class': "js-apply-container"})[1].find('a', href=True)
+    #         the_apply_link = apply_link['href'] # HERE IS THE APPLICABLE LINKS
+    #         company_logo = soupp.find('div', {'class': 'grid--cell fl-shrink0'}).find('img', src=True)
+    #         try:
+    #             category = JobCategory.objects.all().first()
+    #         except:
+    #             category = JobCategory(name = 'Recent')
+    #             category.save()
+    #         job = WorkDetails(
+    #             category=category, job_title=title_text,posted_on=posted_on, job_desc=des, apply_job_link=the_apply_link, company_name=company_names,  is_scraped_data=True, company_img_url=company_logo['src']
+    #         )
+    #         job.save()
+    # url = "https://weworkremotely.com/remote-jobs/search?term=remote"
+    # html = requests.get(url, headers=headers).text
+    # soup = BeautifulSoup(html, 'lxml')
+    # section = soup.find_all("section", {"class": "jobs"})
+    # for item in section:
+    #     a = item.select("li > a")
+    #     for item2 in a:
+    #         if str(item2.parent['class']) != "['view-all']":
+    #             link = f"https://weworkremotely.com{item2.get('href')}"
+    #             htmll = requests.get(link, headers=headers).text
+    #             soupp = BeautifulSoup(htmll, 'lxml')
+    #             des = soupp.find("div", {"class": "listing-container"})
+    #             try:
+    #                 company_logo = soupp.find_all('div', {"class": "listing-logo"})[0].find('img', src=True)
+    #             except IndexError:
+    #                 continue
+    #             posted_on = soupp.find('div', {'class': 'listing-header-container'})
+    #             try:
+    #                 posted_on = posted_on.find('h3').get_text()
+    #             except:
+    #                 posted_on = ''
+    #             apply_link_div = soupp.find_all('div', {'class': 'apply_tooltip'})[0].find('a', href=True)
+    #             apply_links  = apply_link_div['href'] # HERE IS THE APPLYABLE LINK #############
+    #             company = item2.find("span", {"class": "company"})
+    #             title = item2.find("span", {"class": "title"})
+    #         else:
+    #             continue
+    #         try:
+    #             category = JobCategory.objects.all().first()
+    #         except:
+    #             category = JobCategory(name = 'Recent')
+    #             category.save()
+    #         job = WorkDetails(category=category, job_title=title.get_text(),posted_on=posted_on, job_desc=des, apply_job_link=apply_links, company_name=company.get_text(),  is_scraped_data=True, company_img_url=company_logo['src']
+    #         )
+
+    #         job.save()
+    return None
+
+
+
+def run_continuously(self, interval=15):
     """Continuously run, while executing pending jobs at each elapsed
     time interval.
     @return cease_continuous_run: threading.Event which can be set to
@@ -75,7 +126,7 @@ def run_continuously(self, interval=5):
         @classmethod
         def run(cls):
             while not cease_continuous_run.is_set():
-                self.run_pending()
+                # self.run_pending()
                 time.sleep(interval)
 
     continuous_thread = ScheduleThread()

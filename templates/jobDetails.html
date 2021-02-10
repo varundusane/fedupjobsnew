@@ -41,9 +41,9 @@
             <li class="nav-item active ml-5">
               <a class="nav-link"  href="/tags">Tags</a>
             </li>
-            <li class="nav-item active ml-5">
+            <!-- <li class="nav-item active ml-5">
               <a class="nav-link" href="/location">Location</a>
-            </li>
+            </li> -->
             <li class="nav-item active ml-5">
               <a class="nav-link" href="/blog">Blogs</a>
             </li>
@@ -55,13 +55,14 @@
         </div>
       </nav>
     <div class="container">
-        <div style="height: 50px;">
-
-            <div class="col-2 mx-auto" style="background-image: url('{{ jobDetails.company_img_url }}'); height: 50px;"></div>
+        <!-- <div style="height: 150px;"> -->
+      <br>
+        <div>
+            <div class="col-1 mx-auto" style="background-image: url('{{ jobDetails.company_img_url }}'); width:100px; height:80px; background-repeat: no-repeat;"></div>
         </div>
         <div>
-            <p class="text-center" style="text-transform: uppercase; color: gray; font-weight: 750;">{{jobDetails.company_name}} IS HIRING A</p>
-            <h1 class="text-center">{{ jobDetails.job_title }}</h1>
+            <p class="text-center" style="text-transform: uppercase; color: gray; font-weight: bold; font-size: 30px; ">{{jobDetails.company_name}} IS HIRING A</p>
+            <h1 class="text-center" style="font-size: 70px;">{{ jobDetails.job_title }}</h1>
         </div>
         <div class="col-md-7" style="border-bottom: 1px solid #eee0e0;">
             {% if jobDetails.location and jobDetails.country%}
@@ -76,12 +77,12 @@
             <div class="col-md-7 ">
                 {{jobDetails.job_desc|safe}}
                 <div class="mt-5 mb-5">
-                    <a class="btn btn-active btn-primary " href="{{jobDetails.apply_job_link}}">APPLY FOR THIS JOB</a>
+                    <a class="btn btn-active btn-primary "  href="{{jobDetails.apply_job_link}} " target="_blank" rel="noopener noreferrer">APPLY FOR THIS JOB</a>
                 </div>
                 
             </div>
             <div class="col-md-3 ml-5 text-center d-none d-md-block justify-content-center">
-                <a href="{{jobDetails.apply_job_link}}" class="btn btn-active btn-primary ">APPLY FOR THIS JOB</a>
+                <a href="{{jobDetails.apply_job_link}}"  class="btn btn-active btn-primary " target="_blank" rel="noopener noreferrer">APPLY FOR THIS JOB</a>
             </div>
         </div>
 

@@ -24,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=p_gj-kr(j+^7ji8t)dw4^)0fhm(kc@1n2dly5uo@k8w042q3='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['www.fedup.works','fedup.works']
+ALLOWED_HOSTS = ['www.fedup.works','fedup.works']
 
 
-# Application definition
+# aPPLICATION DEFINITIOn
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -133,8 +134,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
