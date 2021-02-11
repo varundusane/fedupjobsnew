@@ -162,7 +162,7 @@ def Command():
     joson_response()
 
 
-def run_continuously(self, interval=70):
+def run_continuously(self, interval=300):
     """Continuously run, while executing pending jobs at each elapsed
     time interval.
     @return cease_continuous_run: threading.Event which can be set to
