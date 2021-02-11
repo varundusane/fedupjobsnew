@@ -24,7 +24,7 @@ def weworkSrcipe():
                 soupp = BeautifulSoup(htmll, 'lxml')
                 des = soupp.find("div", {"class": "listing-container"})
                 desc = str(des)
-                # print(desc)
+                print(desc)
                 # p = des.find_all("div")
                 # paragraphs = []
                 #
@@ -137,21 +137,21 @@ def joson_response():
     remoteok = 'https://remoteok.io/api'
     result2 = requests.get(remoteok, headers=headers)
     responses = result2.json()
-    # try:
-    #     category = JobCategory.objects.all().first()
-    # except:
-    #     category = JobCategory(name='Recent')
-    #     category.save()
-    # for response in responses:
-    #     try:
-    #         job = WorkDetails(category=category, job_title=response['position'], posted_on=response['date'],
-    #                           job_desc=response['description'], apply_job_link=response['url'],
-    #                           company_name=response['company'], is_scraped_data=True,
-    #                           company_img_url=response['company_logo']
-    #                           )
-    #         job.save()
-    #     except:
-    #         pass
+    try:
+        category = JobCategory.objects.all().first()
+    except:
+        category = JobCategory(name='Recent')
+        category.save()
+    for response in responses:
+        try:
+            job = WorkDetails(category=category, job_title=response['position'], posted_on=response['date'],
+                              job_desc=response['description'], apply_job_link=response['url'],
+                              company_name=response['company'], is_scraped_data=True,
+                              company_img_url=response['company_logo']
+                              )
+            job.save()
+        except:
+            pass
 
 
 def Command():
@@ -162,7 +162,7 @@ def Command():
     joson_response()
 
 
-def run_continuously(self, interval=300):
+def run_continuously(self, interval=7):
     """Continuously run, while executing pending jobs at each elapsed
     time interval.
     @return cease_continuous_run: threading.Event which can be set to

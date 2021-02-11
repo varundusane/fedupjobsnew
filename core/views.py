@@ -146,7 +146,7 @@ def index(request):
 
     page_no = request.GET.get('page', 1)
 
-    works = WorkDetails.objects.all()
+    works = WorkDetails.objects.all().order_by('-id')
     # restaurents = Restaurents.objects.all().order_by('-avarage_ratings')
     paginator = Paginator(works, 20)
     try:
