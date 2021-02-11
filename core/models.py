@@ -21,6 +21,7 @@ class WorkDetails(models.Model):
     location = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=50, null=True, blank=True)
     job_desc = models.TextField(null=True, blank=True)
+    # jobdes = models.FileField(upload_to="job/", blank=True)
     apply_job_link = models.TextField(null=True, blank=True)
     company_name = models.CharField(max_length=50, null=True, blank=True)
     company_website = models.CharField(max_length=50, null=True, blank=True)
@@ -30,4 +31,6 @@ class WorkDetails(models.Model):
     posted_on = models.CharField(max_length=200, blank=True, null=True)
     def __str__(self):
         return self.job_title
+
+
 
