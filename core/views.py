@@ -1,3 +1,4 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from django.shortcuts import render, redirect
 from .models import JobCategory, WorkDetails, Job_keys
 from .serializers import WorkDetailsSerializer
@@ -107,36 +108,36 @@ def Command():
     #         job.save()
     return None
 
-
-def run_continuously(self, interval=15):
-    """Continuously run, while executing pending jobs at each elapsed
-    time interval.
-    @return cease_continuous_run: threading.Event which can be set to
-    cease continuous run.
-    Please note that it is *intended behavior that run_continuously()
-    does not run missed jobs*. For example, if you've registered a job
-    that should run every minute and you set a continuous run interval
-    of one hour then your job won't be run 60 times at each interval but
-    only once.
-    """
-
-    cease_continuous_run = threading.Event()
-
-    class ScheduleThread(threading.Thread):
-
-        @classmethod
-        def run(cls):
-            while not cease_continuous_run.is_set():
-                # self.run_pending()
-                time.sleep(interval)
-
-    continuous_thread = ScheduleThread()
-    continuous_thread.setDaemon(True)
-    continuous_thread.start()
-    return cease_continuous_run
-
-
-Scheduler.run_continuously = run_continuously
+#
+# def run_continuously(self, interval=15):
+#     """Continuously run, while executing pending jobs at each elapsed
+#     time interval.
+#     @return cease_continuous_run: threading.Event which can be set to
+#     cease continuous run.
+#     Please note that it is *intended behavior that run_continuously()
+#     does not run missed jobs*. For example, if you've registered a job
+#     that should run every minute and you set a continuous run interval
+#     of one hour then your job won't be run 60 times at each interval but
+#     only once.
+#     """
+#
+#     cease_continuous_run = threading.Event()
+#
+#     class ScheduleThread(threading.Thread):
+#
+#         @classmethod
+#         def run(cls):
+#             while not cease_continuous_run.is_set():
+#                 # self.run_pending()
+#                 time.sleep(interval)
+#
+#     continuous_thread = ScheduleThread()
+#     continuous_thread.setDaemon(True)
+#     continuous_thread.start()
+#     return cease_continuous_run
+#
+#
+# Scheduler.run_continuously = run_continuously
 
 
 # return render(request, 'index.html')
@@ -163,9 +164,9 @@ def index(request):
     # return render(request, 'users/allrestaurent.html', context)
 
     ########################################
-    scheduler = Scheduler()
-    scheduler.every().second.do(Command)
-    scheduler.run_continuously()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(Command, 'interval', minutes=1)
+    scheduler.start()
     context = {}
     context['categorys'] = JobCategory.objects.all()
     context['jobs'] = jobs
@@ -218,7 +219,10 @@ def company_jobs(request, company_name):
 def filtered_keys(request, job_keys):
     context = {}
     key = Job_keys.objects.get(name=job_keys)
-    jobs = WorkDetails.objects.filter(job_keys__in=[key])
+    print(key.id)
+    jobs = WorkDetails.objects.filter(Q(job_title__icontains=key))
+
+    print(jobs)
     context['jobs'] = jobs
     context['page_for'] = 'job_keys'
     context['company_name'] = job_keys

@@ -26,8 +26,8 @@ SECRET_KEY = '=p_gj-kr(j+^7ji8t)dw4^)0fhm(kc@1n2dly5uo@k8w042q3='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.fedup.works','fedup.works']
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['www.fedup.works','fedup.works']
+ALLOWED_HOSTS = []
 
 
 # aPPLICATION DEFINITIOn

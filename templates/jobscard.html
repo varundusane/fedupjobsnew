@@ -67,10 +67,17 @@
   <section class='content-wrapper'>
     <div class='content'>
       <div class='companyCards'>
+
+
+
         {% for job in jobs %}
+        {% if job.company_name|length > 0 %}
+
+        {% if '/' not in job.company_name %}
         <a class="companyCard" href="{% url 'all_jobs_in_company' company_name=job.company_name %}">
 
-          <div class='companyCard__logo' style='background-image: url(
+
+           <div class='companyCard__logo' style='background-image: url(
             {% for a in all %}
             {% if a.company_name == job.company_name %}
             {{ a.company_img_url}}
@@ -82,7 +89,11 @@
             <div class='companyCard__details__count'>{{job.total}} jobs</div>
           </div>
         </a>
+        {% endif %}
+        {% endif %}
         {% endfor %}
+
+
       </div>
     </div>
   </section>

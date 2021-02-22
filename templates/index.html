@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="searchForm__section searchForm__section--secondary col-12 col-md-4">
                         <div class="searchForm__section__label">
                             <div id="remote">
@@ -161,7 +161,7 @@
                                                 <div class="searchForm__section__label__toggleOption searchForm__section__label__toggleOption--default">
                                                     Where?
                                                 </div>
-                                                or 
+                                                or
                                                 <div class="searchForm__section__label__toggleOption">Remote</div>
                                             </div>
                                         </span></label></div>
@@ -259,17 +259,18 @@
                                     <div class="jobCard__details__logo col-3" style="background-image: url('{{ job.company_img_url }}')"></div>
                                     <br>
                                     <div class="jobCard__details__ultra col-8">
-                                        
+
                                         <a class=""
                                             href="{% url 'job_details' id=job.id %}">{{ job.job_title }}</a> <div class="divv">{{job.posted_on}}</div>
-                                            {% if job.company_name %}     
+                                            {% if job.company_name %}
+                                            {% if '/' not in job.company_name %}
                                         <div class="jobCard__details__company row col-12"><a href="{% url 'all_jobs_in_company' company_name=job.company_name %}">{{ job.company_name }}</a>
-
-                                            {% endif %}  
+                                            {% endif %}
+                                            {% endif %}
 
                                         </div>
 
-                                       
+
                                     </div>
                                 </div>
                                 <div class="jobCard__tags  d-none d-md-block col-md-4">
@@ -285,8 +286,8 @@
                             </div>
                             {% endif %}
                             {% endfor %}
-                            
-                            <a style="display: block; line-height: 3" href="{% url 'category' name=category.name %}">Browse  all {{ category.name}}…</a>
+
+                            <!-- <a style="display: block; line-height: 3" href="{% url 'category' name=category.name %}">Browse  all {{ category.name}}…</a> -->
                         </div>
                     </section>
                 </div>
@@ -332,6 +333,7 @@
         $('#part_time').on('click change', searchResult);
         $('#internship').on('click change', searchResult);
         $('#contractor').on('click change', searchResult);
+
         let initialObj = {
             'title': $('#title').val(),
             'location': $('#search-input').val(),
@@ -341,6 +343,7 @@
             'contract': $('#contractor').prop('checked')
         }
         console.log(initialObj);
+        console.log(initialObj.title);
         function searchResult(){
             if(past_html == ''){
                 past_html = $('.jobCards__category').html()
@@ -379,24 +382,28 @@
                         locations += ', '+ index.country
                     }
                     text += `
-                    <div class="jobCard row" data-action="click->clickable#open" data-clickable-target="_blank"
-                                data-clickable-url="/art-director-design-at-procore-4" data-controller="clickable">
-                                <div class="jobCard__details col-md-4 col-12">
-                                    <div class="jobCard__details__logo col-3" style="background-image: url('{{ job.company_img_url }}')"></div>
-                                    <div class="jobCard__details__ultra col-8">
-                                        <a class=""
-                                            href="/job/${index.id}">${index.job_title}</a>
-                                        <div class="jobCard__details__company row col-12"><a href="/jobs/${index.company_name}">${index.company_name}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="jobCard__tags d-none d-md-block col-md-4">
-                                    ${aTags}
-                                </div>
-                                <div class="jobCard__details__location d-none d-md-block col-md-4">
-                                    ${locations}
-                                </div>
+                            <div class="jobCard  row" data-action="click->clickable#open" data-clickable-target="_blank"
+                        data-clickable-url="/art-director-design-at-procore-4" data-controller="clickable">
+
+                            <div class="jobCard__details__logo col-3" style="background-image: url('${index.company_img_url }')"></div>
+                            <div class="jobCard__details__ultra col-8">
+                                <a class="jobCard__details__title row col-12"
+                                    href="/job/${index.id}">${index.job_title}>${index.job_title}</a>
+                                <div class="jobCard__details__company row col-12">${index.company_name}</div>
                             </div>
+
+                        <div class="jobCard__tags  d-none d-md-block col-md-4">
+                            {% for key in job.job_keys.all %}
+                            <a class="tag" href="{% url 'filtered_keys' job_keys=key.name %}">${aTags}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="jobCard__details__location d-none d-md-block col-md-4">
+
+                            ${locations}
+                             {% if job.country %}{{job.country}} {% endif %}
+                        </div>
+                        </div>
+
                     `;
                 })
 
