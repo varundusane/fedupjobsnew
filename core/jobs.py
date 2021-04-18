@@ -1,4 +1,4 @@
-# from schedule import Scheduler
+# import schedule 
 import threading
 import time
 from .models import JobCategory, WorkDetails
@@ -73,76 +73,88 @@ def weworkSrcipe():
                 category.save()
             job = WorkDetails(category=category, job_title=title.get_text(), posted_on=posted_on,
                               job_desc=desc, apply_job_link=apply_links, company_name=company.get_text(),
-                              is_scraped_data=True, company_img_url=company_logo['src'],location=locat
+                              is_scraped_data=True, company_img_url=company_logo['src'],location=locat, verify_link=link
                               )
 
-            job.save()
+            j = WorkDetails.objects.all()
+            if (job not in j):
+                job.save()
+            else:
+                pass
+    
 
 
-# def start_stackoverflow_scrapes():
-#     title_texts = []
-#
-#     descriptions = []
-#     jobs = []
-#     company_namess = []
-#     company_img = []
-#
-#     url = f"https://stackoverflow.com/jobs?r=true"
-#
-#     html = requests.get(url, headers=headers).text
-#     soup = BeautifulSoup(html, features='html.parser')
-#
-#     pages = soup.find("div", {"class": "s-pagination"}).find_all('a', {"class": "s-pagination--item"})
-#     pages.pop()
-#     # print(pages)
-#     for page in pages:
-#         print(page.text)
-#         if page.text != 'nextchevron_right':
-#             page_url = page['href']
-#             link1 = f"https://stackoverflow.com{page_url}"
-#             htmls = requests.get(link1, headers=headers).text
-#             soups = BeautifulSoup(htmls, features='html.parser')
-#
-#             items = soups.find_all("a", {"class": "s-link stretched-link"})
-#             # print(len(items))
-#             for item in items:
-#                 title_text = item.get_text()
-#                 link2 = f"https://stackoverflow.com{item.get('href')}"
-#
-#                 htmll = requests.get(link2, headers=headers).text
-#                 soupp = BeautifulSoup(htmll, features='html.parser')
-#                 company_names = soupp.find('div', {'class': "fc-black-700 fs-body3"}).find('a')
-#                 # print(company_names)
-#                 des = soupp.find("section", {"class": "mb32 fs-body2 fc-medium pr48"})
-#                 print(des)
-#                 desc = str(des)
-#                 time_of_post = soupp.find('ul', {
-#                     "class": "horizontal-list horizontal-list__lg fs-body1 fc-black-500 ai-baseline mb24"})
-#
-#                 try:
-#                     posted_on = time_of_post.find('li').get_text()
-#                 except:
-#                     posted_on = ''
-#                 apply_link = soupp.find_all('div', {'class': "js-apply-container"})[1].find('a', href=True)
-#                 try:
-#                     the_apply_link = apply_link['href']  # HERE IS THE APPLICABLE LINKS
-#                 except:
-#                     continue
-#                 company_logo = soupp.find('div', {'class': 'grid--cell fl-shrink0'}).find('img', src=True)
-#                 try:
-#                     category = JobCategory.objects.all().first()
-#                 except:
-#                     category = JobCategory(name='Recent')
-#                     category.save()
-#                 try:
-#                     job = WorkDetails(
-#                         category=category, job_title=title_text, posted_on=posted_on, job_desc=desc,
-#                         apply_job_link=the_apply_link, company_name=company_names.text, is_scraped_data=True,
-#                         company_img_url=company_logo['src']
-#                     )
-#                     job.save()
-#                 except:
-#                     pass
+def start_stackoverflow_scrapes():
+    title_texts = []
+
+    descriptions = []
+    jobs = []
+    company_namess = []
+    company_img = []
+
+    url = f"https://stackoverflow.com/jobs?r=true"
+
+    html = requests.get(url, headers=headers).text
+    soup = BeautifulSoup(html, features='html.parser')
+
+    pages = soup.find("div", {"class": "s-pagination"}).find_all('a', {"class": "s-pagination--item"})
+    pages.pop()
+    # print(pages)
+    for page in pages:
+        print(page.text)
+        if page.text != 'nextchevron_right':
+            page_url = page['href']
+            link1 = f"https://stackoverflow.com{page_url}"
+            htmls = requests.get(link1, headers=headers).text
+            soups = BeautifulSoup(htmls, features='html.parser')
+
+            items = soups.find_all("a", {"class": "s-link stretched-link"})
+            print(len(items))
+            for item in items:
+                title_text = item.get_text()
+                link2 = f"https://stackoverflow.com{item.get('href')}"
+
+                htmll = requests.get(link2, headers=headers).text
+                soupp = BeautifulSoup(htmll, features='html.parser')
+                company_names = soupp.find('div', {'class': "fc-black-700"}).find('a')
+                # print(company_names)
+                des = soupp.find("section", {"class": "mb32 fs-body2 fc-medium"})
+                print(des)
+                desc = str(des)
+                time_of_post = soupp.find('ul', {
+                    "class": "horizontal-list horizontal-list__lg fs-body1 fc-black-500 ai-baseline mb24"})
+
+                try:
+                    posted_on = time_of_post.find('li').get_text()
+                except:
+                    posted_on = ''
+                try:
+                    locat = soupp.find("span", {"class": "fc-black-500"}).text
+
+                except:
+                    locat=''
+                apply_link = soupp.find_all('div', {'class': "js-apply-container"})[1].find('a', href=True)
+                try:
+                    the_apply_link = apply_link['href']  # HERE IS THE APPLICABLE LINKS
+                except:
+                    continue
+                company_logo = soupp.find('div', {'class': 'grid--cell fl-shrink0'}).find('img', src=True)
+                try:
+                    category = JobCategory.objects.all().first()
+                except:
+                    category = JobCategory(name='Recent')
+                    category.save()
+
+                job = WorkDetails(
+                    category=category, job_title=title_text, posted_on=posted_on, job_desc=desc,
+                    apply_job_link=the_apply_link, company_name=company_names.text, is_scraped_data=True,
+                    company_img_url=company_logo['src'],location=locat,verify_link=link2
+                )
+                j = WorkDetails.objects.all()
+                if (job not in j):
+                    job.save()
+                else:
+                    pass
 #
 #
 # def joson_response():
@@ -169,8 +181,9 @@ def weworkSrcipe():
 def Command():
     print('Called')
     WorkDetails.objects.filter(is_scraped_data=True).delete()
+    start_stackoverflow_scrapes()
     weworkSrcipe()
-    # start_stackoverflow_scrapes()
+    
     # joson_response()
 
 
@@ -206,8 +219,10 @@ BackgroundScheduler.run_continuously = run_continuously
 
 
 def start_scheduler():
+    
     scheduler = BackgroundScheduler()
-    scheduler.add_job(Command, 'interval', minutes=20)
+    
+    scheduler.add_job(Command, 'interval', hours = 12)
     scheduler.start()
+    
 
-# Command()
