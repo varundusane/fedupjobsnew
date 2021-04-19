@@ -30,7 +30,7 @@ class WorkDetails(models.Model):
     company_img_url = models.CharField(max_length=200, blank=True, null=True)
     posted_on = models.CharField(max_length=200, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True) 
-    verify = models.BooleanField(default=False)
+    verify = models.BooleanField(default=True)
     verify_link = models.CharField(max_length=200, blank=True, null=True)
     def __str__(self):
         return self.job_title
