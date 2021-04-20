@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework import routers
-from .views import filteredViewSet, filteredCompanyViewSet, filtered_for_keysViewSet, filtered_for_categoryViewSet, filtered_for_countryViewSet, blog
+from .views import filteredViewSet, filteredCompanyViewSet, filtered_for_keysViewSet, filtered_for_categoryViewSet, filtered_for_countryViewSet, blog, tos
 
 router = routers.DefaultRouter()
 router.register('filteredViewSet', filteredViewSet, 'filteredViewSet')
@@ -25,6 +25,7 @@ urlpatterns = [
     path('search_on_index', views.index_search, name="index_search"),
     path('category/<name>', views.category, name="category"),
     path('blog', views.blog, name="blog"),
+    path('tos', views.tos, name="tos")
     # path('fetch', views.Command, name="command"),
     
 ]

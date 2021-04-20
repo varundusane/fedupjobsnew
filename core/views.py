@@ -131,6 +131,8 @@ def allTags(request):
 def collection(request):
     return render(request, 'collection.html')
 
+def tos(request):
+    return render(request, 'tos.html')
 
 def locations(request):
     context = {}

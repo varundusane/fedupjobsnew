@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>fedup.jobs</title>
+  <title>Find Easy Remote Jobs Online : IT,Remote Softare developer,Remote Programmer,Remote Coder,Remote Online Data Entry,Remote Customer Service,Remote Design </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
@@ -12,9 +12,66 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'css/location.css' %}">
+
+  <style>
+
+    #loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    margin: -76px 0 0 -76px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+    
+    /* Add animation to "page content" */
+    .animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+    }
+    
+    @-webkit-keyframes animatebottom {
+    from { bottom:-100px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+    }
+    
+    @keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+    }
+    
+    #myDiv {
+    display: none;
+    text-align: center;
+    }
+    </style>
+    
+
+
 </head>
 
-<body>
+<body onload="myFunction()" style="margin:0;">
+  <div id="loader"></div>
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,37 +79,35 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-5">
-          <a class="nav-link" href="/">Jobs </a>
+          <a class="nav-link" href="/">Home </a>
         </li>
         <li class="nav-item active ml-5">
-          <a class="nav-link" href="/startup">Startup</a>
+          <a class="nav-link" href="/startup">Search by Company</a>
         </li>
         <li class="nav-item active ml-5">
-          <a class="nav-link"  href="/tags">Tags</a>
+          <a class="nav-link" href="/location">Search by Location</a>
         </li>
         <li class="nav-item active ml-5">
-          <a class="nav-link" href="/location">Location</a>
-        </li>
-        
+            <a class="nav-link"  href="/tags">Search by Job Type</a>
+          </li>
       </ul>
-      <!-- <form class="form-inline my-2 my-lg-0"> -->
-        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-          <a href="/addNewPost/" class="btn btn-outline-info text-center text-md-left ml-5 ml-sm-0 my-2 my-sm-0">post your job</a>
-      <!-- </form> -->
+  
     </div>
   </nav>
+
   <section class='content-wrapper'>
     <div class='content'>
-      <div class="row">
-        <h1 class=" col-md-3 text-primary text-center text-md-left h1">Remote jobs.</h1>
-        <h2 class=" col-md-9 h3 ml-2 ml-md-0 p-md-0">Help shape the future by joining one of the fastest growing
-            technology startups.</h2>
+      <div >
+        <h1 class=" col-md-3 text-primary text-center text-md-left h1">EasyRemoteJob</h1>
+        <br>
+        <h2 class=" col-md-9 h3 ml-2 ml-md-0 p-md-0">Click on any of the locations to see their jobs
+      </h2>
     </div>
     </div>
   </section>
   <section class='content-wrapper'>
     <div class='content'>
-      <div class='locationCards'>
+      <div class='locationCards animate-bottom'>
         {% for country in countries %}
         {% if country.location %}
         <a style="background-image: {% if forloop.counter|divisibleby:2 %}url(https://source.unsplash.com/1600x900/?country,nature{% else %}url(https://source.unsplash.com/1600x900/?nature,country{% endif %})" class="locationCard" href="{% url 'job_in_country' country=country.location %}">
@@ -71,51 +126,18 @@
       </div>
     </div>
   </section>
-  <script>
-    // Perfect Audience
-
-    (function () {
-      window._pa = window._pa || {};
-      // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
-      // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
-      // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
-
-      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
-      pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/5b9540e15345177c93000021.js";
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
-    })();
-
-    // LinkedIn
-
-    _linkedin_partner_id = "291203";
-    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-
-    (function () {
-      var s = document.getElementsByTagName("script")[0];
-      var b = document.createElement("script");
-      b.type = "text/javascript"; b.async = true;
-      b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-      s.parentNode.insertBefore(b, s);
-    })();
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none;" alt=""
-      src="https://dc.ads.linkedin.com/collect/?pid=291203&fmt=gif" />
-  </noscript>
-
-  <script>
-    !function (e, t, n, s, u, a) {
-      e.twq || (s = e.twq = function () {
-        s.exe ? s.exe.apply(s, arguments) : s.queue.push(arguments);
-      }, s.version = '1.1', s.queue = [], u = t.createElement(n), u.async = !0, u.src = '//static.ads-twitter.com/uwt.js',
-        a = t.getElementsByTagName(n)[0], a.parentNode.insertBefore(u, a))
-    }(window, document, 'script');
-    // Insert Twitter Pixel ID and Standard Event data below
-    twq('init', 'o0cqx');
-    twq('track', 'PageView');
-  </script>
-
+  
 </body>
-
+<script >
+  var myVar;
+  
+  function myFunction() {
+    myVar = setTimeout(showPage, 5000);
+  }
+  
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+  </script>
 </html>

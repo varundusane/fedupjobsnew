@@ -26,8 +26,8 @@ SECRET_KEY = '=p_gj-kr(j+^7ji8t)dw4^)0fhm(kc@1n2dly5uo@k8w042q3='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["easyremotejob.com","https://easyremotejob.com","https://www.easyremotejob.com"]
-
+# ALLOWED_HOSTS = ["easyremotejob.com","https://easyremotejob.com","https://www.easyremotejob.com"]
+ALLOWED_HOSTS = []
 
 
 # aPPLICATION DEFINITIOn
@@ -134,9 +134,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')

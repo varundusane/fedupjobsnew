@@ -23,6 +23,22 @@
         .divv {
     text-align:right;
 }
+
+@media 
+  only screen and (max-width: 767px)  {
+    .hide{
+       display:none;
+     }
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: rgb(58, 50, 47);
+  color: white;
+}
+
+
     </style>
 </head>
 
@@ -34,62 +50,30 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
             <li class="nav-item active ml-5">
-              <a class="nav-link" href="/">Jobs </a>
+              <a class="nav-link" href="/">Home </a>
             </li>
             <li class="nav-item active ml-5">
-              <a class="nav-link" href="/startup">Startup</a>
+              <a class="nav-link" href="/startup">Search by Company</a>
             </li>
             <li class="nav-item active ml-5">
-              <a class="nav-link"  href="/tags">Tags</a>
+              <a class="nav-link" href="/location">Search by Location</a>
             </li>
             <li class="nav-item active ml-5">
-              <a class="nav-link" href="/location">Location</a>
-            </li>
-            
+                <a class="nav-link"  href="/tags">Search by Job Type</a>
+              </li>
           </ul>
-          <!-- <form class="form-inline my-2 my-lg-0"> -->
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-              <!-- <a href="/addNewPost/" class="btn btn-outline-info text-center text-md-left ml-5 ml-sm-0 my-2 my-sm-0">post your job</a> -->
-          <!-- </form> -->
+      
         </div>
       </nav>
-    <!-- <div class="mobileNav" data-behavior="toggle-headNav">
-        <div class="logo">fedup.jobs</div>
-    </div>
-    <nav class="headerNav">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">
-                    <img src="img/fedup logo.jpg" data-visited="true" />
-                </a>
-            </li>
-        </ul>
-        <ul class="navjustify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">jobs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/startup">startup</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">collection</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/location">location</a>
-            </li>
-        </ul>
-        <ul class="navjustify-content-end">
-            <li class="nav-item">
-                <a class=" btn btn-active btn-primary" href="/addNewPost/">post your job</a>
-            </li>
-    </nav> -->
+    
     <section class="content-wrapper">
         <div class="content">
-            <div class="row">
-                <h1 class=" col-sm-12 col-md-4 text-primary text-center text-md-left h1">Remote jobs.</h1>
-                <h2 class=" col-sm-12 col-md-8 h3 ml-2 ml-md-0 p-md-0">Help shape the future by joining one of the fastest growing
-                    technology startups.</h2>
+            <div>
+                <h1 class=" col-sm-12  text-primary text-center  h1">EasyRemoteJob</h1>
+                <br><br>
+                <h2 class=" col-sm-12 col-md-12 h3 ml-2 ml-md-0 p-md-0">For Peoples by Peoples | Genuine Jobs listing | 100% Trusted Sources | Easily Find Remote Jobs</h2>
             </div>
+            <br>
             <div class="searchForm" data-behavior="search" data-controller="search-form"
                 data-search-form-since-filter="1607147442">
                 <div class="searchForm__box row">
@@ -187,55 +171,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="searchForm__section searchForm__section--tertiary col-12 col-md-4 mx-auto">
-                        <div class="searchForm__section__input">
-                            <div id="commitments">
-                                <div class="ais-RefinementList">
-                                    <ul class="ais-RefinementList-list my-auto row">
-                                        <li class="ais-RefinementList-item col-6">
-                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
-                                                        class="ais-RefinementList-checkbox "id='full_time' name="job_type"
-                                                        value="Full-Time"> <span
-                                                        class="ais-RefinementList-labelText">Full-Time</span> <span
-                                                        class="ais-RefinementList-count">{{ full_time }}</span> </label>
-                                            </div>
-                                        </li>
-                                        <li class="ais-RefinementList-item col-6">
-                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
-                                                        class="ais-RefinementList-checkbox" id="part_time" name="job_type"
-                                                        value="Part-Time"> <span
-                                                        class="ais-RefinementList-labelText">Part-Time</span> <span
-                                                        class="ais-RefinementList-count">{{ part_time }}</span> </label>
-                                            </div>
-                                        </li>
-                                        <li class="ais-RefinementList-item col-6">
-                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
-                                                        class="ais-RefinementList-checkbox" id="internship" name="job_type"
-                                                        value="Internship"> <span
-                                                        class="ais-RefinementList-labelText">Internship</span> <span
-                                                        class="ais-RefinementList-count">{{ Internship }}</span>
-                                                </label></div>
-                                        </li>
-                                        <li class="ais-RefinementList-item col-6">
-                                            <div><label class="ais-RefinementList-label"> <input type="checkbox"
-                                                        class="ais-RefinementList-checkbox" id="contractor" name="job_type"
-                                                        value="Contractor"> <span
-                                                        class="ais-RefinementList-labelText">Contractor</span> <span
-                                                        class="ais-RefinementList-count">{{ Contractor }}</span>
-                                                </label></div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
             </div>
         </div>
+        
     </section>
-
+    <div class="hide">
+    <center><img src="{% static '/images/usa.gif' %}"/><img src="{% static '/images/asia.gif' %}"/><img src="{% static '/images/canada.gif' %}"/><img src="{% static '/images/europe.gif' %}"/><img src="{% static '/images/au.gif' %}"/><img src="{% static '/images/france.gif' %}"/><img src="{% static '/images/germany.gif' %}"/></center>
+    </div>
     <div data behaviour="search-default">
         <div class="job card">
             <div class="jobCards__category container">
@@ -414,6 +359,13 @@
             })
         }
     </script>
+<br><br><br>
+<footer>
+    <h5>EasyRemoteJob 2019 - 2021</h5>
+    <a href="/tos">Terms and conditions</a>
+    
+  </footer>
+  
 
 </body>
 
