@@ -80,8 +80,8 @@ def jobDetails(request, id):
 
 def startup(request):
     context = {}
-    context['jobs'] = WorkDetails.objects.filter(verify=True).values('company_name').annotate(total=Count('company_name'))
-    context['all'] = WorkDetails.objects.filter(verify=True)
+    context['jobs'] = WorkDetails.objects.values('company_name').annotate(total=Count('company_name'))
+    # context['all'] = WorkDetails.objects.filter(verify=True)
     return render(request, 'jobscard.html', context)
 
 
